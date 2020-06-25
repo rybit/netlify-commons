@@ -40,3 +40,5 @@ require (
 )
 
 go 1.13
+
+replace github.com/armon/go-metrics v0.3.3 => github.com/mheffner/go-metrics v0.3.4-0.20200625203819-e0b1d18b0cdc
