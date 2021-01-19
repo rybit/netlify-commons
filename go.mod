@@ -2,7 +2,7 @@ module github.com/netlify/netlify-commons
 
 require (
 	github.com/BurntSushi/toml v0.3.1
-	github.com/DataDog/datadog-go v3.2.0+incompatible
+	github.com/DataDog/datadog-go v4.2.0+incompatible
 	github.com/armon/go-metrics v0.3.3
 	github.com/bitly/go-simplejson v0.5.0 // indirect
 	github.com/blang/semver v3.5.1+incompatible // indirect
@@ -54,5 +54,7 @@ require (
 	gopkg.in/launchdarkly/go-server-sdk.v4 v4.0.0-20200729232655-2a44fb361895
 	gopkg.in/yaml.v3 v3.0.0-20200615113413-eeeca48fe776
 )
+
+replace github.com/armon/go-metrics v0.3.3 => github.com/mheffner/go-metrics v0.3.4-0.20210119031049-ce109c593e89
 
 go 1.14
