@@ -27,7 +27,7 @@ type RequestTracer struct {
 
 func NewTracer(w http.ResponseWriter, r *http.Request, log logrus.FieldLogger, service, resource string) (http.ResponseWriter, *http.Request, *RequestTracer) {
 	var reqID string
-	log, reqID = requestLogger(r, log)
+	log, reqID = RequestLogger(r, log)
 
 	r, span := WrapWithSpan(r, reqID, service, resource)
 	trackWriter := &trackingWriter{

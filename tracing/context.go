@@ -3,6 +3,8 @@ package tracing
 import (
 	"context"
 	"net/http"
+
+	uuid "github.com/satori/go.uuid"
 )
 
 type contextKey string
@@ -33,7 +35,10 @@ func GetRequestID(r *http.Request) string {
 	if id := GetRequestIDFromContext(r.Context()); id != "" {
 		return id
 	}
-	return r.Header.Get(HeaderRequestUUID)
+	if rid := r.Header.Get(HeaderRequestUUID); rid != "" {
+		return rid
+	}
+	return uuid.NewV4().String()
 }
 
 func GetRequestIDFromContext(ctx context.Context) string {

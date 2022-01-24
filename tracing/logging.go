@@ -8,17 +8,14 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-const (
-	logKey = contextKey("nf-log-key")
-)
-
-func requestLogger(r *http.Request, log logrus.FieldLogger) (logrus.FieldLogger, string) {
+func RequestLogger(r *http.Request, log logrus.FieldLogger) (logrus.FieldLogger, string) {
 	if r.Header.Get(HeaderNFDebugLogging) != "" {
 		logger := logrus.New()
 		logger.SetLevel(logrus.DebugLevel)
 
 		if entry, ok := log.(*logrus.Entry); ok {
 			log = logger.WithFields(entry.Data)
+			logger.Hooks = entry.Logger.Hooks
 		}
 	}
 

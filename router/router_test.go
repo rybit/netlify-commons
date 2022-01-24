@@ -6,6 +6,8 @@ import (
 	"strconv"
 	"testing"
 
+	"github.com/netlify/netlify-commons/testutil"
+	"github.com/netlify/netlify-commons/tracing"
 	"github.com/opentracing/opentracing-go"
 	"github.com/opentracing/opentracing-go/mocktracer"
 	"github.com/sirupsen/logrus"
@@ -79,11 +81,13 @@ func TestTracing(t *testing.T) {
 	}()
 
 	noop := func(w http.ResponseWriter, r *http.Request) error {
+		assert.NotNil(t, tracing.GetTracer(r))
 		w.WriteHeader(http.StatusOK)
 		return nil
 	}
 
-	r := New(logrus.WithField("test", t.Name()), OptEnableTracing("some-service"))
+	tl, logHook := testutil.TestLogger(t)
+	r := New(tl, OptEnableTracing("some-service"))
 
 	r.Method(http.MethodPatch, "/patch", noop)
 	r.Delete("/abc/{def}", noop)
@@ -110,6 +114,7 @@ func TestTracing(t *testing.T) {
 	for name, scene := range scenes {
 		t.Run(name, func(t *testing.T) {
 			mt.Reset()
+			logHook.Reset()
 
 			rec := httptest.NewRecorder()
 			r.ServeHTTP(rec, httptest.NewRequest(scene.method, scene.path, nil))
@@ -121,6 +126,8 @@ func TestTracing(t *testing.T) {
 				assert.Equal(t, scene.resourceName, spans[0].Tag(ext.ResourceName))
 				assert.Equal(t, strconv.Itoa(http.StatusOK), spans[0].Tag(ext.HTTPCode))
 			}
+			// should be a starting and finished request for each request
+			assert.Len(t, logHook.AllEntries(), 2)
 		})
 	}
 }
