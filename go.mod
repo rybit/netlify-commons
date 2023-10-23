@@ -40,7 +40,7 @@ require (
 	golang.org/x/net v0.0.0-20200813134508-3edf25e44fcc
 	gopkg.in/DataDog/dd-trace-go.v1 v1.34.0
 	gopkg.in/check.v1 v1.0.0-20200227125254-8fa46927fb4f // indirect
-	gopkg.in/launchdarkly/go-sdk-common.v2 v2.5.0
+	gopkg.in/launchdarkly/go-sdk-common.v2 v2.5.1
 	gopkg.in/launchdarkly/go-server-sdk.v5 v5.8.1
 	gopkg.in/segmentio/analytics-go.v3 v3.1.0
 	gopkg.in/yaml.v3 v3.0.0-20200615113413-eeeca48fe776
