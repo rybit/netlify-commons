@@ -8,7 +8,7 @@ jobs:
   release-please:
     runs-on: ubuntu-latest
     steps:
-      - uses: navikt/github-app-token-generator@v1.1.1
+      - uses: navikt/github-app-token-generator@v1.2.1
         id: get-token
         with:
           private-key: ${{ secrets.TOKENS_PRIVATE_KEY }}
