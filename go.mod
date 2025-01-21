@@ -4,7 +4,7 @@ require (
 	github.com/BurntSushi/toml v0.4.1
 	github.com/DataDog/datadog-go v4.8.3+incompatible
 	github.com/Microsoft/go-winio v0.5.0 // indirect
-	github.com/armon/go-metrics v0.3.10
+	github.com/armon/go-metrics v0.5.4
 	github.com/bugsnag/bugsnag-go/v2 v2.1.2
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/go-chi/chi v4.0.2+incompatible
